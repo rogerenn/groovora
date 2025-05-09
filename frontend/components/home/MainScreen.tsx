@@ -1,8 +1,9 @@
-import AlbumCarousel from "@/components/AlbumCarousel";
+import AlbumCarousel from "@/components/home/AlbumCarousel";
+import Button from "@/components/ui/Button"; // NUEVO
 
 export default function MainScreen() {
   return (
-    <section className="min-h-screen bg-gradient-to-br from-purple-900 to-black text-white flex flex-col items-center justify-center px-4">
+    <section className="min-h-screen text-white flex flex-col items-center justify-center px-7">
       <div className="max-w-xl text-center mt-12">
         <AlbumCarousel />
 
@@ -14,10 +15,11 @@ export default function MainScreen() {
           Celebrate music with your friends.
         </h1>
 
-        <button className="mt-6 px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-bold rounded-full text-sm shadow-lg transition">
+        <Button className="mt-6 text-sm rounded-full shadow-lg">
           Start rating — it’s free.
-        </button>
+        </Button>
       </div>
     </section>
   );
 }
+// Compare this snippet from frontend/components/AlbumCarousel.tsx:

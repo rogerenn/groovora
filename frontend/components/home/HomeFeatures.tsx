@@ -36,7 +36,7 @@ export default function HomeFeatures() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="bg-purple-800 bg-opacity-70 rounded-xl p-5 flex items-start space-x-4 shadow-md hover:shadow-lg transition"
+              className="bg-gray-800 bg-opacity-70 rounded-xl p-5 flex items-start space-x-4 shadow-md hover:shadow-lg transition"
             >
               <div className="text-yellow-300 text-xl mt-1">{feature.icon}</div>
               <p className="text-sm text-white leading-relaxed">{feature.text}</p>

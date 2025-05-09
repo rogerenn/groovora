@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
+import { fetchAlbums } from '@/services/SpotifyApi'; // NUEVO
+
 
 interface Album {
   id: string;
@@ -13,9 +15,8 @@ export default function AlbumCarousel() {
   const [albums, setAlbums] = useState<Album[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:4000/spotify/albums')
-      .then((res) => res.json())
-      .then((data) => setAlbums(data))
+    fetchAlbums()
+      .then(setAlbums)
       .catch((err) => console.error('Error fetching albums:', err));
   }, []);
 

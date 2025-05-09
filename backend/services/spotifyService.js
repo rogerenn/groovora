@@ -1,8 +1,10 @@
 const axios = require('axios');
+require('dotenv').config();
 
 let accessToken = null;
 let tokenExpiresAt = 0;
 
+// Obtiene o reutiliza el token de Spotify
 async function getAccessToken() {
   const now = Date.now();
   if (accessToken && now < tokenExpiresAt) {
@@ -29,6 +31,7 @@ async function getAccessToken() {
   return accessToken;
 }
 
+// Lógica para obtener nuevos lanzamientos
 async function getNewReleases() {
   const token = await getAccessToken();
 
@@ -41,17 +44,28 @@ async function getNewReleases() {
     }
   );
 
-  // Solo devuelve lo que el frontend necesita
   return res.data.albums.items.map((album) => ({
+    id: album.id,
     name: album.name,
     artist: album.artists.map((a) => a.name).join(', '),
     image: album.images[0]?.url,
-    id: album.id,
     url: album.external_urls.spotify,
+    release_date: album.release_date,
   }));
 }
+
+const getAlbumsByPlaylist = async (playlistId) => {
+  const response = await spotifyApi.getPlaylistTracks(playlistId);
+  return response.body.items.map((item) => ({
+    id: item.track.id,
+    name: item.track.name,
+    artist: item.track.artists[0].name,
+    image: item.track.album.images[0].url,
+    url: item.track.external_urls.spotify,
+  }));
+};
+
 
 module.exports = {
   getNewReleases,
 };
-
